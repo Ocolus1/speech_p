@@ -40,11 +40,11 @@
                 </div>
             </div>
             <main>
-                <form action="/" method="POST">
+                <form action="{{url_for('index')}}" method="POST">
                     <div class="form-group">
                         <label for="text_area">Simply copy and place your content in the box below.</label>
                         <textarea id="text_area" cols="5" rows="10" maxlength="5001" class="form-control" name="body">{{body}}</textarea>
-                        <button class="btn p-3 my-2" formaction="/get" type="sumbit" id="mp3">
+                        <button class="btn p-3 my-2" formaction="{{url_for('get')}}" type="sumbit" id="mp3">
                             <i class="fa fa-play-circle-o"></i>
                         </button>
                     </div>
