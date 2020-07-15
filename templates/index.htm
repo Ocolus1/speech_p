@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Pawo Industries Text to speech system">
+    <meta name="keywords" content="Pawo Industries">
+    <meta name="author" content="Paul Awolesi">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/9846bd7163.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+
+    <title>Text to Speech</title>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    {% if e %}
+    {{e}}
+    {% else %}
+    <div id="wrapper" class="container">
+        <div class="container-fluid shadow-lg  mb-5 rounded">
+            <div id="top_div" class="">
+                <div class="float-left top_div_text">
+                    <div class="text-wrap">
+                        <h3 id="h_3">Online Text to Speech convetor</h3>
+                        <p id="p_1">
+                            Convert your text to voice with a single click.
+                            Free Mp3 Download.
+                        </p>
+                    </div>
+                </div>
+                <div class="float-left top_div_img">
+                    <img src="/static/speaker (1).png" class="img-fluid" alt="speaker">
+                </div>
+            </div>
+            <main>
+                <form action="/" method="POST">
+                    <div class="form-group">
+                        <label for="text_area">Simply copy and place your content in the box below.</label>
+                        <textarea id="text_area" cols="5" rows="10" maxlength="5001" class="form-control" name="body">{{body}}</textarea>
+                        <button class="btn p-3 my-2" formaction="/get" type="sumbit" id="mp3">
+                            <i class="fa fa-play-circle-o"></i>
+                        </button>
+                    </div>
+                    <span><h4 id="char">5000 Characters remaining</h4></span>
+                    <div class="form-group">
+                        <div class="form-inline">
+                            <div class="form-group col-auto my-3">
+                                <label class="" for="language">Select language:</label>
+                                <select class="custom-select mr-3 ml-2" name="lang" id="language">
+                                    <option name="english" value="0" selected>English</option>
+                                    <!-- <option name="french" value="1">French</option> -->
+                                </select>
+                            </div>
+                            <div class="form-group col-auto my-3">
+                                <label class="" for="speed">Select speed:</label>
+                                <select class="custom-select ml-2" name="speed" id="speed">
+                                    <option name="medium" value="0" selected>medium</option>
+                                    <option name="slow" value="1">Slow</option>
+                                    <option name="fast" value="2">Fast</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class=" form-inline col-auto my-2">
+                            <div class="form-group">
+                                <label class="" for="voice">Select voice: </label>
+                                <select class="custom-select ml-2" name="voice" id="voice">
+                                    <option name="male" value="0" selected>Male</option>
+                                    <option name="female" value="1">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn rounded-pill p-3 my-2" type="sumbit" id="mp3_btn">Create Mp3 File</button>
+                    </div>
+                </form>
+            </main>
+            <footer>
+                <nav class="navbar navbar-expand-lg ">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                        <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link" href="#">Services</a>
+                        <a class="nav-item nav-link" href="#">Contact Us</a>
+                        </div>
+                    </div>
+                </nav>
+            </footer>
+        </div>
+    </div>
+    {% endif %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("textarea").on('change paste keyup', function () {
+                sup = document.getElementById("char");
+                var fixed = 5000;
+                var currText = $(this).val();
+                var body = currText.length;
+                var final = fixed - body;
+                sup.innerHTML = final + " Characters remaining";
+                if (currText.length > 5000) {
+                    var text = $(this).text();
+                    $(this).text(text.substr(0, 5000));
+                    alert("You have reached the maximum length for this field");
+                }
+            });
+            
+            
+        });
+    </script>
+</body>
+
+</html>
