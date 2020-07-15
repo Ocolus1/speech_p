@@ -10,7 +10,7 @@ import random
 def index():
     if request.method == "POST":
         body = request.form["body"]
-        lang = request.form["lang"]
+        # lang = request.form["lang"]
         speed = request.form["speed"]
         v = request.form["voice"]
         try:
@@ -55,7 +55,7 @@ def index():
 def get():
     if request.method == "POST":
         body = request.form["body"]
-        lang = request.form["lang"]
+        # lang = request.form["lang"]
         speed = request.form["speed"]
         v = request.form["voice"]
         try:
@@ -92,18 +92,18 @@ def page_not_found(e):
 
 
 @app.errorhandler(403)
-def page_not_found(e):
+def forbidden(e):
     # note that we set the 403 status explicitly
     return render_template('403.htm'), 403
 
 
 @app.errorhandler(410)
-def page_not_found(e):
+def not_good(e):
     # note that we set the 410 status explicitly
     return render_template('410.htm'), 410
 
 
 @app.errorhandler(500)
-def page_not_found(e):
+def internal_server(e):
     # note that we set the 500 status explicitly
     return render_template('500.htm'), 500
